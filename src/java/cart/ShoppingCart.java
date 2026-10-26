@@ -62,8 +62,8 @@ public class ShoppingCart {
         }
         return numberOfItems;
     }
-    
-    public synchronized double getSubTotal() {
+        
+    public synchronized double getSubtotal() {
         double amount = 0;
         for (ShoppingCartItem scItem : items) {
             amount += (scItem.getQuantity() * scItem.getProduct().getPrice());

@@ -28,12 +28,15 @@
                         <input type="text" name="quantity" value="<%= item.getQuantity() %>" size="2">
                         <input type="hidden" name="productId" value="<%= item.getProduct().getId() %>">
                     </td>
-                    <td align="center">$<%= item.getTotal() %></td>
+                    <%--<td align="center">$<%= item.getTotal() %></td>--%>
+                    <td align="center">$<%= String.format("%.2f", item.getTotal()) %></td>
                     <td align="center"><input type="submit" value="Update"></td>
                 </form>
             </tr>
             <% } %>
         </table>
+        <h3>Subtotal: $<%= String.format("%.2f", cart.getSubtotal()) %></h3> 
+    
       <%-- <h3>Subtotal: $<%= cart.getSubtotal() %></h3> --%>
 
         <form action="clearcart.do" method="POST" style="display:inline;">
