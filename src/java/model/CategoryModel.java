@@ -29,5 +29,7 @@ public class CategoryModel {
         Query q = em.createQuery("select o from Category as o");
         return q.getResultList();
     }
-
+    public Category retrieve(int categoryId) {
+        return em.find(Category.class, categoryId);
+    }
 }

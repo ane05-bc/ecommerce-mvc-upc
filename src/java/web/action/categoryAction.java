@@ -22,7 +22,8 @@ public class categoryAction implements Action {
         int num_category = new Integer(categoria);
         
         req.setAttribute("categories", categoryModel.retrieveAll());
+        req.setAttribute("selectedCategory", categoryModel.retrieve(num_category));
         req.setAttribute("products", productModel.retrieveByCategory(num_category));
-        ViewManager.nextView(req, resp, "/view/init.jsp");
+        ViewManager.nextView(req, resp, "/view/category.jsp");
     }
 }

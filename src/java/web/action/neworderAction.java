@@ -35,12 +35,14 @@ public class neworderAction implements Action {
             }
         }
         
+        req.setAttribute("categories", categoryModel.retrieveAll());
         String categoryId = req.getParameter("categoryid");
         if (categoryId != null) {
-            req.setAttribute("categories", categoryModel.retrieveAll());
-            req.setAttribute("products", productModel.retrieveByCategory(Integer.parseInt(categoryId)));
+            int num_category = Integer.parseInt(categoryId);
+            req.setAttribute("selectedCategory", categoryModel.retrieve(num_category));
+            req.setAttribute("products", productModel.retrieveByCategory(num_category));
         }
-        
-        ViewManager.nextView(req, resp, "/view/init.jsp");
+
+        ViewManager.nextView(req, resp, "/view/category.jsp");
     }
 }
