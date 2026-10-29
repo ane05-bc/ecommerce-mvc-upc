@@ -2,19 +2,23 @@ package web.action;
 
 import cart.ShoppingCart;
 import entity.Product;
+import java.util.List;
 import javax.servlet.http.*;
 import model.CategoryModel;
 import model.ProductModel;
+import model.ReviewModel;
 import web.ViewManager;
 
 public class neworderAction implements Action {
 
     CategoryModel categoryModel;
     ProductModel productModel;
+    ReviewModel reviewModel;
 
-    public neworderAction(CategoryModel categoryModel, ProductModel productModel){
+    public neworderAction(CategoryModel categoryModel, ProductModel productModel, ReviewModel reviewModel){
         this.categoryModel = categoryModel;
         this.productModel = productModel;
+        this.reviewModel = reviewModel;
     }
 
     @Override
@@ -41,6 +45,7 @@ public class neworderAction implements Action {
             int num_category = Integer.parseInt(categoryId);
             req.setAttribute("selectedCategory", categoryModel.retrieve(num_category));
             req.setAttribute("products", productModel.retrieveByCategory(num_category));
+            req.setAttribute("averages", reviewModel.retrieveAverages(productModel.retrieveByCategory(num_category)));
         }
 
         ViewManager.nextView(req, resp, "/view/category.jsp");
