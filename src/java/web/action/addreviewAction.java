@@ -26,21 +26,10 @@ public class addreviewAction implements Action {
         int rating = Integer.parseInt(req.getParameter("rating"));
         String comment = req.getParameter("comment");
 
-        if (comment == null) {
-            comment = "";
-        }
-
-        if (comment.length() > 255) {
-            comment = comment.substring(0, 255);
-        }
-
         Product p = productModel.retrieve(productId);
 
-        if (p != null && rating >= 1 && rating <= 5) {
-            reviewModel.create(p, rating, comment);
-        }
-
-        // show the review page again, now with the new review
+        reviewModel.create(p, rating, comment);
+ 
         req.setAttribute("product", p);
         req.setAttribute("reviews", reviewModel.retrieveByProduct(productId));
         req.setAttribute("average", reviewModel.retrieveAverage(productId));
